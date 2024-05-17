@@ -1,0 +1,21 @@
+ const express=require("express")
+ const user=require('./routes/user')
+ const booking=require('./routes/booking')
+ const contact=require('./routes/UserContact')
+ const Mongoose=require('mongoose')
+ const cors=require('cors')
+ const app=express()
+ app.use(cors())
+ Mongoose.connect('mongodb://127.0.0.1:27017/user')
+ Mongoose.connection.on('connected',()=>{
+    console.log("Mongodb is connected succesfully")
+ })
+ app.get('/',(req,res)=>{
+    res.send("home page")
+ })
+ app.use('/user',user)
+ app.use('/booking',booking)
+ app.use('/contact',contact)
+ app.listen(3001,()=>{
+    console.log("server is running on port 3001")
+ })
